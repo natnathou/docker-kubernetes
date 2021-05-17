@@ -1,0 +1,12 @@
+docker run hello-world
+docker create hello-world
+docker start -a  $id
+docker ps
+docker ps --all
+docker stop $id
+docker kill $id
+docker run busybox ls
+docker start $id
+docker logs $id
+
+
