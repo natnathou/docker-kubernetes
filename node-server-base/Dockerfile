@@ -4,9 +4,9 @@ FROM node:alpine
 WORKDIR /usr/app
 
 # Install some depenendencies
-COPY ./package.json ./
+COPY ./NodeProject/package.json ./
 RUN npm install
-COPY ./ ./
+COPY ./NodeProject ./
 
 # Default command
 CMD ["npm", "start"]
