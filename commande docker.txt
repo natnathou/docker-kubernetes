@@ -22,4 +22,5 @@ docker build .
 docker build -f Dockerfile.dev . 
 docker run -it -p 3000:3000 6bc7d1c952bc028d750613ab761b12ab4abe52d32882a21f5d7629d433007948
 docker run -it -p 3000:3000 -v /app/node_modules -v $(pwd):/app 6bc7d1c952bc028d750613ab761b12ab4abe52d32882a21f5d7629d433007948
-docker run -it -p 3000:3000 -v /app/node_modules -v /$(pwd):/app  natnathou:bratest
+winpty docker run -it -p 3000:3000 -v /app/node_modules -v /$(pwd):/app  -e CHOKIDAR_USEPOLLING=true natnathou:bratest
+docker build -f Dockerfile.dev -t natnathou:bratest .
