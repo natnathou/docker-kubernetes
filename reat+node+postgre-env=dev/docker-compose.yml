@@ -1,0 +1,40 @@
+version: '3.9'
+services:
+  api:
+    build:
+      context: ./server-api
+      dockerfile: Dockerfile.dev
+    ports:
+      - '5000:5000'
+    volumes:
+      - /app/node_modules
+      - ./server-api:/app
+    restart: always
+    stdin_open: true
+    tty: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - PGUSER=postgres
+      - PGHOST=db
+      - PGDATABASE=postgres
+      - PGPASSWORD=lInUx
+      - PGPORT=5432
+  client:
+    build:
+      context: ./web-client
+      dockerfile: Dockerfile.dev
+    ports:
+      - '3000:3000'
+    volumes:
+      - /app/node_modules
+      - ./web-client:/app
+    restart: always
+    stdin_open: true
+    tty: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: lInUx
