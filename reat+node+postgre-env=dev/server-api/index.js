@@ -12,13 +12,27 @@ const pgClient = new Pool({
   port: keys.pgPort,
 });
 
+// const initTb = async () => {
+//   await pgClient.query('CREATE TABLE IF NOT EXISTS tbl_values (number INT)');
+
+//   await pgClient.query('INSERT INTO tbl_values (number) VALUES(21)');
+//   await pgClient.query('INSERT INTO tbl_values (number) VALUES(11)');
+//   await pgClient.query('INSERT INTO tbl_values (number) VALUES(411)');
+// };
+
+// initTb();
+
 app.get('/api/testRoutes', async (req, res) => {
   try {
-    const resp = await pgClient.query('SELECT NOW()');
+    const resp = await pgClient.query('SELECT * FROM tbl_values');
+
     console.log(resp);
 
+    const message = resp.rows?.map((x) => {
+      return x.number;
+    });
     res.json({
-      message: resp.rows[0],
+      message,
     });
   } catch (error) {
     res.json({
