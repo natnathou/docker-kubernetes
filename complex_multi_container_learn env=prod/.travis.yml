@@ -1,0 +1,17 @@
+sudo: required
+language: generic
+
+services:
+  - docker
+
+before_install:
+  - docker build -t natnathou/react-test -f ./client/Dockerfile.dev .
+
+script:
+  - docker run -e CI=true natnathou/react-test npm run test
+
+after_success:
+  - docker build -t natnathou/multi-client ./client
+  - docker build -t natnathou/multi-nginx ./nginx
+  - docker build -t natnathou/multi-server ./server
+  - docker build -t natnathou/multi-worker ./worker
